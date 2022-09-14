@@ -1,0 +1,28 @@
+
+
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "databasepostgres.chwtoijulivn.us-east-2.rds.amazonaws.com",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "AWSPostgres",
+            "group": "AppTesis",
+            "database": "AppTesis",
+            "username": "postgres",
+            "password": "postgres123"
+        }
+    ],
+
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "node_modules": true,
+        "client/node_modules": true,
+    }
+}
