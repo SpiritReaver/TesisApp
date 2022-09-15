@@ -1,12 +1,25 @@
 const pool = require("../postgres");
 const { hashPassword, ValidPassword } = require("../utils/bcrypt");
 const { JWTgenerator } = require("../utils/jwtcreator");
+const { tokenCheck } = require("../validators/tokenCheck");
+
+function validEmail(correo) {
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(correo);
+}
 
 //registro + token
 
 const Registro = async (req, res, next) => {
   try {
     const { nombre, apellido, correo, ciudad, telefono, contraseña } = req.body;
+
+    if (
+      ![nombre, apellido, correo, ciudad, telefono, contraseña].every(Boolean)
+    ) {
+      return res.status(401).json("Faltan credenciales en los campos");
+    } else if (!validEmail(correo)) {
+      return res.status(401).json("Correo Invalido");
+    }
 
     const userExist = await pool.query(
       "SELECT * FROM usuarios WHERE correo = $1",
@@ -35,6 +48,12 @@ const Login = async (req, res, next) => {
   try {
     const { correo, contraseña } = req.body;
 
+    if (![correo, contraseña].every(Boolean)) {
+      return res.status(401).json("Faltan credenciales en los campos");
+    } else if (!validEmail(correo)) {
+      return res.status(401).json("Correo Invalido");
+    }
+
     const userExist = await pool.query(
       "SELECT * FROM usuarios WHERE correo = $1",
       [correo]
@@ -51,8 +70,6 @@ const Login = async (req, res, next) => {
       userExist.rows[0].contraseña
     );
 
-    console.log(validPassword);
-
     if (!validPassword) {
       return res
         .status(401)
@@ -61,6 +78,15 @@ const Login = async (req, res, next) => {
 
     const token = await JWTgenerator(userExist.rows[0].usuariosid);
     res.json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//tokenCheck
+const tokenChecking = async (req, res, next) => {
+  try {
+    tokenCheck(req, res, next);
   } catch (error) {
     next(error);
   }
@@ -164,4 +190,5 @@ module.exports = {
   UPDATEusuariobyemail,
   Registro,
   Login,
+  tokenChecking,
 };

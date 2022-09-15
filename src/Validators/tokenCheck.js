@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { secret } = require("../config");
 
-module.exports = async (req, res, next) => {
+function tokenCheck(req, res, next) {
   try {
     const token = req.header("token");
 
@@ -9,9 +9,14 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({ message: "Sin autorización" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_KEY);
+    const decoded = jwt.verify(token, secret);
+    if (decoded) {
+      res.json(true);
+    }
     req.user = decoded.user;
+    next();
   } catch (error) {
     next(error);
   }
-};
+}
+module.exports = { tokenCheck };

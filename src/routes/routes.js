@@ -8,7 +8,9 @@ const {
   UPDATEusuariobyemail,
   Registro,
   Login,
+  tokenChecking,
 } = require("../controllers/controllers");
+const { tokenCheck } = require("../validators/tokenCheck");
 
 const router = Router();
 
@@ -22,6 +24,7 @@ router.put("/updateusuario/:correo", UPDATEusuariobyemail);
 router.post("/registro", Registro);
 router.post("/login", Login);
 
+router.get("/validate", tokenChecking);
 // productos METHODS
 router.get("/productos", getproductos);
 router.get("/precios", getprecios);
