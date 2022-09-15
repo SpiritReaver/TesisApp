@@ -9,4 +9,5 @@ module.exports = {
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT,
   },
+  secret: process.env.SECRET_JWT,
 };
