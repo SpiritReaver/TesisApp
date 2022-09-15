@@ -16,7 +16,7 @@ function tokenCheck(req, res, next) {
     req.user = decoded.user;
     next();
   } catch (error) {
-    next(error);
+    res.status(401).json({ message: "Token invalido" });
   }
 }
 module.exports = { tokenCheck };
