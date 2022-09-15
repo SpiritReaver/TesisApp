@@ -9,6 +9,7 @@ const {
   Registro,
   Login,
   tokenChecking,
+  getUserInfo,
 } = require("../controllers/controllers");
 const { tokenCheck } = require("../validators/tokenCheck");
 
@@ -25,6 +26,8 @@ router.post("/registro", Registro);
 router.post("/login", Login);
 
 router.get("/validate", tokenChecking);
+
+router.get("/dashboard", getUserInfo);
 // productos METHODS
 router.get("/productos", getproductos);
 router.get("/precios", getprecios);

@@ -9,11 +9,13 @@ import Login from "../components/Login";
 
 const RegistroContainer = () => {
   const [value, setValue] = useState(0);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const paperStyle = { width: 400, margin: "20px auto" };
+
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 

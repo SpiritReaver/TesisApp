@@ -1,7 +1,7 @@
 const pool = require("../postgres");
 const { hashPassword, ValidPassword } = require("../utils/bcrypt");
 const { JWTgenerator } = require("../utils/jwtcreator");
-const { tokenCheck } = require("../validators/tokenCheck");
+const { tokenCheck, tokenStillActive } = require("../validators/tokenCheck");
 
 function validEmail(correo) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(correo);
@@ -87,6 +87,21 @@ const Login = async (req, res, next) => {
 const tokenChecking = async (req, res, next) => {
   try {
     tokenCheck(req, res, next);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getUserInfo = async (req, res, next) => {
+  try {
+    tokenStillActive(req, res, next);
+    const id = req.user.id;
+    console.log(id);
+    const user = await pool.query(
+      "SELECT nombre,apellido,correo,ciudad,telefono FROM usuarios WHERE usuariosid = $1",
+      [req.user]
+    );
+    res.json(user.rows[0]);
   } catch (error) {
     next(error);
   }
@@ -191,4 +206,5 @@ module.exports = {
   Registro,
   Login,
   tokenChecking,
+  getUserInfo,
 };
