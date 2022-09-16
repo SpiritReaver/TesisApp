@@ -1,5 +1,6 @@
 const pool = require("../postgres");
 
+//variety methods
 const getInfo = async (req, res, next) => {
   const user = await pool.query(
     "SELECT nombre,apellido,correo,ciudad,telefono FROM usuarios WHERE usuariosid = $1",
