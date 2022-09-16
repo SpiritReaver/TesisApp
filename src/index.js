@@ -1,20 +1,15 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
-
-const usuarioRoute = require("./routes/usuarios.routes");
-const authRoute = require("./routes/auth.routes");
 
 const app = express();
+const routes = require("./routes/routes");
 
-app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
-app.use(cookieParser());
+app.use(express.json());
 
-app.use("/api/usuarios", usuarioRoute);
-app.use("/api/auth", authRoute);
+app.use(routes);
 
 app.use((error, req, res, next) => {
   return res.status(500).json({ message: error.message });
