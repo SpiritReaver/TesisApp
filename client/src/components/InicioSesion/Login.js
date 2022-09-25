@@ -17,12 +17,12 @@ import {
   validationSchemaLogin,
   onSubmitLogin,
   initialValuesLogin,
-} from "../validation/formvalidation";
+} from "../../ValidationInicioSesion/formvalidation";
 
 const Login = ({ handleChange }) => {
   const paperStyle = {
     padding: 50,
-    height: "60vh",
+    height: "70vh",
     width: 300,
     margin: "0 auto",
   };

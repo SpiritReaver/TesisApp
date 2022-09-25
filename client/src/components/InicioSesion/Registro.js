@@ -12,7 +12,7 @@ import {
   initialValuesRegistro,
   validationSchemaRegistro,
   onSubmitRegistro,
-} from "../validation/formvalidation";
+} from "../../ValidationInicioSesion/formvalidation";
 import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 
 const Registro = () => {
@@ -20,7 +20,7 @@ const Registro = () => {
     padding: "50px ",
     width: 300,
     margin: "0 auto",
-    height: "60vh",
+    height: "70vh",
   };
 
   const headerStyle = {

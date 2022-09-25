@@ -4,8 +4,8 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { Paper } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Registro from "../components/Registro";
-import Login from "../components/Login";
+import Registro from "../components/InicioSesion/Registro";
+import Login from "../components/InicioSesion/Login";
 
 const RegistroContainer = () => {
   const [value, setValue] = useState(0);
@@ -13,7 +13,7 @@ const RegistroContainer = () => {
     setValue(newValue);
   };
 
-  const paperStyle = { width: 400, margin: "20px auto" };
+  const paperStyle = { width: 400, margin: "60px auto" };
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
