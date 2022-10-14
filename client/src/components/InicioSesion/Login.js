@@ -11,13 +11,14 @@ import {
 } from "@mui/material";
 
 import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import {
   validationSchemaLogin,
-  onSubmitLogin,
   initialValuesLogin,
 } from "../../ValidationInicioSesion/formvalidation";
+import { useLocation } from "wouter";
+import useUser from "../../hooks/useUser";
 
 const Login = ({ handleChange }) => {
   const paperStyle = {
@@ -37,6 +38,22 @@ const Login = ({ handleChange }) => {
 
   const margField = {
     margin: "8px 0",
+  };
+  const [, navigate] = useLocation();
+  const { login, isLogged } = useUser();
+
+  useEffect(() => {
+    if (isLogged) navigate("/Inicio");
+  }, [isLogged, navigate]);
+
+  const onSubmitLogin = (values, props) => {
+    ////Aca imprimo los datos que esta tomando
+    console.log(values);
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
+    login({ correo: values.correo, contraseña: values.contraseña });
   };
 
   return (
@@ -60,9 +77,9 @@ const Login = ({ handleChange }) => {
               <Field
                 as={TextField}
                 style={margField}
-                name="Usuario"
+                name="correo"
                 variant="outlined"
-                label="Usuario"
+                label="correo"
                 placeholder="Ingresa tu usuario o correo "
                 fullWidth
                 helperText={<ErrorMessage name="Usuario" />}
@@ -70,13 +87,13 @@ const Login = ({ handleChange }) => {
               <Field
                 as={TextField}
                 style={margField}
-                name="Contraseña"
+                name="contraseña"
                 variant="outlined"
-                label="Contraseña"
+                label="contraseña"
                 placeholder="Ingresa tu usuario o correo "
                 type="password"
                 fullWidth
-                helperText={<ErrorMessage name="Contraseña" />}
+                helperText={<ErrorMessage name="contraseña" />}
               />
               <Field
                 name="Recuerdame"
@@ -92,7 +109,7 @@ const Login = ({ handleChange }) => {
                 fullWidth
                 disabled={props.isSubmitting}
               >
-                {props.isSubmitting ? "Cargando" : "Registrarse"}
+                {props.isSubmitting ? "Cargando" : "Ingresar"}
               </Button>
             </Form>
           )}

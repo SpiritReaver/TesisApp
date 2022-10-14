@@ -3,7 +3,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { Paper } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import Registro from "../components/InicioSesion/Registro";
 import Login from "../components/InicioSesion/Login";
 
@@ -25,11 +24,7 @@ const RegistroContainer = () => {
         aria-labelledby={`simple-tab-${index}`}
         {...other}
       >
-        {value === index && (
-          <Box>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
+        {value === index && <Box>{children}</Box>}
       </div>
     );
   }

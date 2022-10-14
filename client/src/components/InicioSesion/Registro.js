@@ -6,14 +6,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import {
   initialValuesRegistro,
   validationSchemaRegistro,
-  onSubmitRegistro,
 } from "../../ValidationInicioSesion/formvalidation";
 import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
+import useUser from "../../hooks/useUser";
+import { useLocation } from "wouter";
 
 const Registro = () => {
   const paperStyle = {
@@ -38,6 +39,28 @@ const Registro = () => {
   const bottonStyle = {
     width: 300,
     margin: "20px auto",
+  };
+
+  const { register, isLogged } = useUser();
+  const [, navigate] = useLocation();
+
+  useEffect(() => {
+    if (isLogged) navigate("/Inicio");
+  }, [isLogged, navigate]);
+
+  const onSubmitRegistro = (values, props) => {
+    //Aca imprimo los datos que esta tomando
+    console.log(values);
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
+    register({
+      nombre: values.Nombre,
+      correo: values.Email,
+      contraseña: values.Contraseña,
+      telefono: values.Telefono,
+    });
   };
 
   return (

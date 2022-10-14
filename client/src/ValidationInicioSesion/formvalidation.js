@@ -1,27 +1,16 @@
 import * as Yup from "yup";
+
 //validacion login
 export const validationSchemaLogin = Yup.object().shape({
-  Usuario: Yup.string()
+  correo: Yup.string()
     .email("Ingresa un correo valido")
     .required("Obligatorio"),
-  Contraseña: Yup.string().required("Obligatorio"),
+  contraseña: Yup.string().required("Obligatorio"),
 });
 
-export const onSubmitLogin = (values, props) => {
-  ////Aca imprimo los datos que esta tomando
-  console.log(values);
-  setTimeout(() => {
-    props.resetForm();
-    props.setSubmitting(false);
-  }, 2000);
-
-  console.log(props);
-};
-
 export const initialValuesLogin = {
-  Usuario: "",
-  Contraseña: "",
-  Recuerdame: false,
+  correo: "",
+  contraseña: "",
 };
 
 //validacion registro
@@ -46,13 +35,3 @@ export const validationSchemaRegistro = Yup.object().shape({
     .oneOf([Yup.ref("Contraseña")], "Las contraseñas no coinciden")
     .required("Obligatorio"),
 });
-
-export const onSubmitRegistro = (values, props) => {
-  //Aca imprimo los datos que esta tomando
-  console.log(values);
-  console.log(props);
-  setTimeout(() => {
-    props.resetForm();
-    props.setSubmitting(false);
-  }, 2000);
-};
