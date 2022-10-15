@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Context = React.createContext({});
 
 export function UserContext({ children }) {
-  const [token, setToken] = useState(window.sessionStorage.getItem("token"));
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   return (
     <Context.Provider value={{ token, setToken }}>{children}</Context.Provider>
