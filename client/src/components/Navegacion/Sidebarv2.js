@@ -31,9 +31,6 @@ export default function Sidebarv2() {
   };
   const { logout } = useUser();
   const navigate = useNavigate();
-  getUserInfo().then((res) => {
-    return res.data;
-  });
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -80,43 +77,27 @@ export default function Sidebarv2() {
           <List>
             <div>
               <ListItem>
-                <NavLink to="/Inicio" style={NavStyle} activeClassName="active">
+                <NavLink to="/Inicio" style={NavStyle}>
                   <ListItemText>Inicio</ListItemText>
                 </NavLink>
               </ListItem>
               <ListItem>
-                <NavLink
-                  to="/Recetas"
-                  style={NavStyle}
-                  activeClassName="active"
-                >
+                <NavLink to="/Recetas" style={NavStyle}>
                   <ListItemText>Recetas</ListItemText>
                 </NavLink>
               </ListItem>
               <ListItem>
-                <NavLink
-                  to="/Historial"
-                  style={NavStyle}
-                  activeClassName="active"
-                >
+                <NavLink to="/Historial" style={NavStyle}>
                   <ListItemText>Historial</ListItemText>
                 </NavLink>
               </ListItem>
               <ListItem>
-                <NavLink
-                  to="/ListaCompra"
-                  style={NavStyle}
-                  activeClassName="active"
-                >
+                <NavLink to="/ListaCompra" style={NavStyle}>
                   <ListItemText>Lista de Compra</ListItemText>
                 </NavLink>
               </ListItem>
               <ListItem>
-                <NavLink
-                  to="/Usuario"
-                  style={NavStyle}
-                  activeClassName="active"
-                >
+                <NavLink to="/Usuario" style={NavStyle}>
                   <ListItemText>Usuario</ListItemText>
                 </NavLink>
               </ListItem>

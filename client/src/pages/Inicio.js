@@ -19,7 +19,9 @@ export const Inicio = () => {
 
   useEffect(() => {
     getUserId();
-    setTimeout(() => {}, 3000);
+    setTimeout(() => {
+      getUserInfo();
+    }, 3000);
   }, [getUserId]);
 
   useEffect(() => {
