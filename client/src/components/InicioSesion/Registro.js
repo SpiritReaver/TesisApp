@@ -14,7 +14,7 @@ import {
 } from "../../ValidationInicioSesion/formvalidation";
 import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 import useUser from "../../hooks/useUser";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 
 const Registro = () => {
   const paperStyle = {
@@ -42,10 +42,10 @@ const Registro = () => {
   };
 
   const { register, isLogged } = useUser();
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLogged) navigate("/Inicio");
+    if (isLogged) navigate("/inicio");
   }, [isLogged, navigate]);
 
   const onSubmitRegistro = (values, props) => {

@@ -10,6 +10,7 @@ import Historial from "./pages/Historial";
 import ItemReceta from "./components/ItemRecetas/ItemReceta";
 import Inicio from "./pages/Inicio";
 import { UserContext } from "./context/UserContext";
+import { UserIdContext } from "./context/UserIdContext";
 
 export default function App() {
   return (
@@ -18,15 +19,16 @@ export default function App() {
         <Routes>
           <Route path="/" element={<RegistroContainer />} />
         </Routes>
-
-        <Routes>
-          <Route path="/Busqueda" exact={true} element={<Busqueda />} />
-          <Route path="/Inicio" exact={true} element={<Inicio />} />
-          <Route path="/Historial" exact={true} element={<Historial />} />
-          <Route path="/ListaCompra" exact={true} element={<ListaCompra />} />
-          <Route path="/Recetas" exact={true} element={<Recetas />} />
-          <Route path="/Recetas/:id" element={<ItemReceta />} />
-        </Routes>
+        <UserIdContext>
+          <Routes>
+            <Route path="/Busqueda" exact={true} element={<Busqueda />} />
+            <Route path="/Inicio" exact={true} element={<Inicio />} />
+            <Route path="/Historial" exact={true} element={<Historial />} />
+            <Route path="/ListaCompra" exact={true} element={<ListaCompra />} />
+            <Route path="/Recetas" exact={true} element={<Recetas />} />
+            <Route path="/Recetas/:id" element={<ItemReceta />} />
+          </Routes>
+        </UserIdContext>
       </BrowserRouter>
     </UserContext>
   );

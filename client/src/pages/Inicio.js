@@ -1,19 +1,31 @@
-import React from "react";
-
+import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Busqueda from "./Busqueda";
 import Sidebarv2 from "../components/Navegacion/Sidebarv2";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Button, CardActions } from "@mui/material";
 import "./Inicio.css";
+import userUserId from "../hooks/userUserId";
+import UserContext from "../context/UserContext";
+import getUserInfo from "../services/gerUserInfo";
 
 export const Inicio = () => {
-  const TextStyle = {
-    TextAligne: "center",
-  };
+  const { getUserId } = userUserId();
+  const { token } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getUserId();
+    setTimeout(() => {}, 3000);
+  }, [getUserId]);
+
+  useEffect(() => {
+    if (!token) navigate("/");
+  }, [token, navigate]);
+
   return (
     <div>
       <div>

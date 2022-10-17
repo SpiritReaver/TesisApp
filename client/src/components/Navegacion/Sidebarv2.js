@@ -9,6 +9,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { List } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import Button from "@mui/material/Button";
+import useUser from "../../hooks/useUser";
+import { useNavigate } from "react-router-dom";
+import getUserInfo from "../../services/gerUserInfo";
+
 import "./Sidebar.css";
 
 const drawerWidth = 240;
@@ -24,6 +29,19 @@ export default function Sidebarv2() {
     textDecoration: "none",
     color: "white",
   };
+  const { logout } = useUser();
+  const navigate = useNavigate();
+  getUserInfo().then((res) => {
+    return res.data;
+  });
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("cerrar sesion");
+    logout();
+    navigate("/");
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -43,6 +61,8 @@ export default function Sidebarv2() {
           <Typography variant="h8" noWrap component="div">
             La app que te cuida
           </Typography>
+
+          <Typography variant="h5" noWrap component="div"></Typography>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -100,6 +120,13 @@ export default function Sidebarv2() {
                   <ListItemText>Usuario</ListItemText>
                 </NavLink>
               </ListItem>
+              <div className="sidebarv2__logout">
+                <ListItem>
+                  <Button variant="contained" onClick={handleClick}>
+                    Log Out
+                  </Button>
+                </ListItem>
+              </div>
             </div>
           </List>
         </Box>

@@ -10,7 +10,6 @@ export default function useUser() {
     ({ correo, contraseña }) => {
       loginService({ correo, contraseña })
         .then((token) => {
-          console.log(token);
           window.localStorage.setItem("token", token);
           setToken(token);
         })
@@ -23,7 +22,6 @@ export default function useUser() {
     ({ nombre, correo, contraseña, telefono }) => {
       registerService({ nombre, correo, contraseña, telefono })
         .then((token) => {
-          console.log(token);
           window.localStorage.setItem("token", token);
           setToken(token);
         })
@@ -34,6 +32,7 @@ export default function useUser() {
 
   const logout = useCallback(() => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("UserId");
     setToken(null);
   }, [setToken]);
 

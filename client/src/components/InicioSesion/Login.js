@@ -17,7 +17,7 @@ import {
   validationSchemaLogin,
   initialValuesLogin,
 } from "../../ValidationInicioSesion/formvalidation";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 
 const Login = ({ handleChange }) => {
@@ -39,11 +39,12 @@ const Login = ({ handleChange }) => {
   const margField = {
     margin: "8px 0",
   };
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   const { login, isLogged } = useUser();
 
   useEffect(() => {
-    if (isLogged) navigate("/Inicio");
+    console.log(isLogged);
+    if (isLogged) navigate("/inicio");
   }, [isLogged, navigate]);
 
   const onSubmitLogin = (values, props) => {
@@ -54,6 +55,8 @@ const Login = ({ handleChange }) => {
       props.setSubmitting(false);
     }, 2000);
     login({ correo: values.correo, contraseña: values.contraseña });
+
+    console.log(isLogged);
   };
 
   return (
