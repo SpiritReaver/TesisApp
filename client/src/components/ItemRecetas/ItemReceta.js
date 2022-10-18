@@ -3,64 +3,64 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Sidebarv2 from "../Navegacion/Sidebarv2";
 import BootstrapDialogTitle from "../ItemRecetas/Modal/Modal";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const ItemReceta = () => {
-  const photos = [
-    {
-      src: "https://s1.eestatic.com/2020/01/28/cocinillas/recetas/pasta-y-arroz/arroz-pollo-pasta_y_arroz_463216136_143694761_1024x576.jpg",
-    },
-  ];
+  const [Receta, setReceta] = useState([]);
+  const [Productos, setProductos] = useState([]);
+  const [TipoReceta, setTipoReceta] = useState([]);
+
+  const { RecetaId } = useParams();
+
+  useEffect(() => {
+    const URL = "http://3.83.218.170:4000/api/recetas/";
+    axios.get(URL + RecetaId).then((res) => {
+      setReceta(res.data.lista);
+      setProductos(res.data.lista.Productos);
+      setTipoReceta(res.data.lista.Tiporeceta);
+    });
+  }, [RecetaId]);
 
   return (
-    <div>
+    <div key={Receta.id}>
       <div className="flex">
         <Sidebarv2 />
         <div className="content">
           <div className="hotelContainer">
             <div className="hotelWrapper">
-              <h1 className="hotelTitle">ARROZ CON POLLO A LA ESPAÑOLA </h1>
+              <h1 className="hotelTitle">{Receta.titulo}</h1>
               <div className="hotelAddress">
                 <FontAwesomeIcon icon={faLocationDot} />
-                <span>Dieta diabetica</span>
+                <span>{TipoReceta.tipoReceta}</span>
               </div>
               <span className="hotelDistance">Ingredientes</span>
               <div className="hotelDetails">
                 <span className="hotelPriceHighlight">
-                  <ul>Pechuga de pollo • Cebolla • Champiñones • Ajo • Apio</ul>
+                  {Productos.map((Productos) => {
+                    return (
+                      <div key={Productos.id}>
+                        <li>{Productos.producto}</li>
+                      </div>
+                    );
+                  })}
                 </span>
                 <div className="hotelImages">
-                  {photos.map((photo, i) => (
-                    <div className="hotelImgWrapper" key={i}>
-                      <img src={photo.src} alt="" className="hotelImg" />
-                    </div>
-                  ))}
+                  <div className="hotelImgWrapper">
+                    <img src={Receta.imagen} alt="" className="hotelImg" />
+                  </div>
                 </div>
               </div>
               <div className="hotelDetails">
                 <div className="hotelDetailsTexts">
                   <h1 className="hotelTitle">Instrucciones</h1>
-                  <p className="hotelDesc">
-                    Caliente el aceite de oliva a fuego medio en una olla
-                    antiadherente. Añada la cebolla, el ajo, el apio, los
-                    pimientos rojos o verdes y los champiñones. Cocine a fuego
-                    medio, revolviendo constantemente por 3 minutos o hasta que
-                    se ablanden. Añada el arroz integral y sofría por 2 a 3
-                    minutos, revolviendo constantemente hasta mezclar todos los
-                    ingredientes. Añada el pollo, la sal, el caldo de pollo, el
-                    agua (1 ½ taza), el azafrán o Sazón™ y los tomates. Deje
-                    hervir. Reduzca el fuego a medio-bajo, tape la cacerola y
-                    deje reposar el guiso hasta que el agua se absorba y el
-                    arroz se ablande, unos 20 minutos. Agregue y mezcle las
-                    arvejas, el maíz y los frijoles; cocine por 8 a 10 minutos.
-                    Una vez que todo esté caliente, estará listo para servir.
-                    Adorne con aceitunas o alcaparras, si lo desea.
-                  </p>
+                  <p className="hotelDesc">{Receta.pasos}</p>
                 </div>
                 <div className="hotelDetailsPrice">
-                  <h1>Perfecto para 9 porciones</h1>
-                  <span>470 calorias</span>
+                  <span>{Receta.informacionNutricional}</span>
                   <h2>
-                    <b>$18000</b> (COP)
+                    <b>{Receta.precioReceta}</b> (COP)
                   </h2>
                   <BootstrapDialogTitle />
                 </div>

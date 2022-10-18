@@ -26,7 +26,7 @@ export default function App() {
             <Route path="/Historial" exact={true} element={<Historial />} />
             <Route path="/ListaCompra" exact={true} element={<ListaCompra />} />
             <Route path="/Recetas" exact={true} element={<Recetas />} />
-            <Route path="/Recetas/:id" element={<ItemReceta />} />
+            <Route path="/Recetas/:RecetaId" element={<ItemReceta />} />
           </Routes>
         </UserIdContext>
       </BrowserRouter>

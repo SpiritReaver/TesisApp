@@ -29,47 +29,48 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function ItemRecetav2() {
+  const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
+  const [recetas, setRecetas] = useState([]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const [recetas, setRecetas] = useState([]);
-
   useEffect(() => {
     const URL = "http://3.83.218.170:4000/api/recetas";
     axios.get(URL).then((res) => {
-      console.log(res.data.RecetasAll);
       setRecetas(res.data.RecetasAll);
     });
   }, []);
 
-  const handleSearch = () => {
-    navigate("/Recetas/1");
-  };
-
-  const navigate = useNavigate();
-
   function color(color) {
     const coloresTipoRecetas = {
-      "Dieta para diabeticos": "#0000ff",
-      "Dieta Sana": "#00ff00",
+      "Dieta para diabeticos": "#00d7f3f3",
+      "Dieta Sana": "#51da5c",
       "Dieta Baja en calorias": "#fff000",
     };
     return coloresTipoRecetas[color];
   }
 
-  console.log(color("Dieta para diabeticos"));
   const itemRecetas = recetas.map((RecetasAll) => {
+    const handleSearch = () => {
+      navigate("/Recetas/" + RecetasAll.id);
+    };
+
     return (
-      <div key={RecetasAll.id}>
+      <React.Fragment key={RecetasAll.id}>
         <Card className="searchItem" sx={{ maxWidth: 345 }}>
           <CardHeader
             action={<IconButton aria-label="settings"></IconButton>}
             title={RecetasAll.titulo}
           />
-          <h4 className="Dieta" Backg="#00ff00">
+          <h4
+            className="Dieta"
+            style={{
+              backgroundColor: color(RecetasAll.Tiporeceta.tipoReceta),
+            }}
+          >
             {RecetasAll.Tiporeceta.tipoReceta}
           </h4>
           <span className="Calorias">{RecetasAll.informacionNutricional}</span>
@@ -82,9 +83,11 @@ export default function ItemRecetav2() {
           <CardContent>
             {RecetasAll.Productos.map((Productos) => {
               return (
-                <Typography variant="body2" color="text.secondary">
-                  {Productos.producto}
-                </Typography>
+                <React.Fragment key={Productos.id}>
+                  <Typography variant="body2" color="text.secondary">
+                    {Productos.producto}
+                  </Typography>
+                </React.Fragment>
               );
             })}
           </CardContent>
@@ -105,18 +108,13 @@ export default function ItemRecetav2() {
               <Typography paragraph>Preparacion:</Typography>
 
               <Typography paragraph>{RecetasAll.pasos}</Typography>
-              <Button
-                variant="contained"
-                href="#contained-buttons"
-                maxWidth
-                onClick={handleSearch}
-              >
+              <Button variant="contained" onClick={handleSearch}>
                 Ver mas
               </Button>
             </CardContent>
           </Collapse>
         </Card>
-      </div>
+      </React.Fragment>
     );
   });
 
