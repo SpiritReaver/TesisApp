@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React from "react";
 
 import Busqueda from "./Busqueda";
 
@@ -14,10 +14,6 @@ export const Recetas = () => {
           <div className="content">
             <Busqueda />
 
-            <ItemRecetav2 />
-            <ItemRecetav2 />
-            <ItemRecetav2 />
-            <ItemRecetav2 />
             <ItemRecetav2 />
           </div>
         </div>

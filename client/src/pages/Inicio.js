@@ -8,21 +8,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions } from "@mui/material";
 import "./Inicio.css";
-import userUserId from "../hooks/userUserId";
+
 import UserContext from "../context/UserContext";
-import getUserInfo from "../services/gerUserInfo";
 
 export const Inicio = () => {
-  const { getUserId } = userUserId();
   const { token } = useContext(UserContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getUserId();
-    setTimeout(() => {
-      getUserInfo();
-    }, 3000);
-  }, [getUserId]);
 
   useEffect(() => {
     if (!token) navigate("/");

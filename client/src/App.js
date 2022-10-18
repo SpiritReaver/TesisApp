@@ -17,10 +17,10 @@ export default function App() {
     <UserContext>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<RegistroContainer />} />
+          <Route index element={<RegistroContainer />} />
         </Routes>
         <UserIdContext>
-          <Routes>
+          <Routes suppressNoMatchWarning={true}>
             <Route path="/Busqueda" exact={true} element={<Busqueda />} />
             <Route path="/Inicio" exact={true} element={<Inicio />} />
             <Route path="/Historial" exact={true} element={<Historial />} />

@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -32,71 +34,91 @@ export default function ItemRecetav2() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const navigate = useNavigate();
+
+  const [recetas, setRecetas] = useState([]);
+
+  useEffect(() => {
+    const URL = "http://3.83.218.170:4000/api/recetas";
+    axios.get(URL).then((res) => {
+      console.log(res.data.RecetasAll);
+      setRecetas(res.data.RecetasAll);
+    });
+  }, []);
 
   const handleSearch = () => {
     navigate("/Recetas/1");
   };
 
-  return (
-    <Card className="searchItem" sx={{ maxWidth: 345 }}>
-      <CardHeader
-        action={<IconButton aria-label="settings"></IconButton>}
-        title="Arroz con pollo a la española"
-      />
-      <h4 className="Dieta">Dieta para diabeticos</h4>
-      <span className="Calorias">470 calorias </span>
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://s1.eestatic.com/2020/01/28/cocinillas/recetas/pasta-y-arroz/arroz-pollo-pasta_y_arroz_463216136_143694761_1024x576.jpg"
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          Pechuga de pollo • Cebolla • Champiñones • Ajo • Apio
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Preparacion:</Typography>
+  const navigate = useNavigate();
 
-          <Typography paragraph>
-            Caliente el aceite de oliva a fuego medio en una olla antiadherente.
-            Añada la cebolla, el ajo, el apio, los pimientos rojos o verdes y
-            los champiñones. Cocine a fuego medio, revolviendo constantemente
-            por 3 minutos o hasta que se ablanden. Añada el arroz integral y
-            sofría por 2 a 3 minutos, revolviendo constantemente hasta mezclar
-            todos los ingredientes. Añada el pollo, la sal, el caldo de pollo,
-            el agua (1 ½ taza), el azafrán o Sazón™ y los tomates. Deje hervir.
-            Reduzca el fuego a medio-bajo, tape la cacerola y deje reposar el
-            guiso hasta que el agua se absorba y el arroz se ablande, unos 20
-            minutos. Agregue y mezcle las arvejas, el maíz y los frijoles;
-            cocine por 8 a 10 minutos. Una vez que todo esté caliente, estará
-            listo para servir. Adorne con aceitunas o alcaparras, si lo desea.
-          </Typography>
-          <Button
-            variant="contained"
-            href="#contained-buttons"
-            maxWidth
-            onClick={handleSearch}
-          >
-            Ver mas
-          </Button>
-        </CardContent>
-      </Collapse>
-    </Card>
-  );
+  function color(color) {
+    const coloresTipoRecetas = {
+      "Dieta para diabeticos": "#0000ff",
+      "Dieta Sana": "#00ff00",
+      "Dieta Baja en calorias": "#fff000",
+    };
+    return coloresTipoRecetas[color];
+  }
+
+  console.log(color("Dieta para diabeticos"));
+  const itemRecetas = recetas.map((RecetasAll) => {
+    return (
+      <div key={RecetasAll.id}>
+        <Card className="searchItem" sx={{ maxWidth: 345 }}>
+          <CardHeader
+            action={<IconButton aria-label="settings"></IconButton>}
+            title={RecetasAll.titulo}
+          />
+          <h4 className="Dieta" Backg="#00ff00">
+            {RecetasAll.Tiporeceta.tipoReceta}
+          </h4>
+          <span className="Calorias">{RecetasAll.informacionNutricional}</span>
+          <CardMedia
+            component="img"
+            height="194"
+            image={RecetasAll.imagen}
+            alt="Paella dish"
+          />
+          <CardContent>
+            {RecetasAll.Productos.map((Productos) => {
+              return (
+                <Typography variant="body2" color="text.secondary">
+                  {Productos.producto}
+                </Typography>
+              );
+            })}
+          </CardContent>
+          <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography paragraph>Preparacion:</Typography>
+
+              <Typography paragraph>{RecetasAll.pasos}</Typography>
+              <Button
+                variant="contained"
+                href="#contained-buttons"
+                maxWidth
+                onClick={handleSearch}
+              >
+                Ver mas
+              </Button>
+            </CardContent>
+          </Collapse>
+        </Card>
+      </div>
+    );
+  });
+
+  return <>{itemRecetas}</>;
 }

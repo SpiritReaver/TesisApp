@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +14,7 @@ import Button from "@mui/material/Button";
 import useUser from "../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../../services/gerUserInfo";
+import userUserId from "../../hooks/userUserId";
 
 import "./Sidebar.css";
 
@@ -31,6 +33,19 @@ export default function Sidebarv2() {
   };
   const { logout } = useUser();
   const navigate = useNavigate();
+  const { getUserId } = userUserId();
+
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    getUserId();
+    setTimeout(() => {
+      getUserInfo().then((res) => {
+        setName(res.nombre);
+        console.log(name);
+      });
+    }, 1000);
+  }, [getUserId, name]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -59,7 +74,9 @@ export default function Sidebarv2() {
             La app que te cuida
           </Typography>
 
-          <Typography variant="h5" noWrap component="div"></Typography>
+          <Typography className="nya" noWrap component="div">
+            Bienvenido,{name}
+          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
