@@ -12,6 +12,12 @@
 
 }
 
+.headerSearchText {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 10px;
+}
 .optionCounter {
   margin-top: 10
   px;

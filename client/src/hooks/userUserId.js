@@ -9,7 +9,7 @@ export default function useUserId() {
     getUserIdService()
       .then((UserId) => {
         window.localStorage.setItem("UserId", JSON.stringify(UserId.data));
-        setUserId(UserId);
+        setUserId(JSON.stringify(UserId.data));
       })
       .catch((err) => console.log(err));
   }, [setUserId]);

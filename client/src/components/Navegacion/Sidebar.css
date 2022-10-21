@@ -1,43 +1,44 @@
 .sidebar {
-    width: 14rem;
-    height: calc(100vh - 10px);
-    border-right: 1px solid #c4ccde;
-    background-color: rgba(51, 48, 48, 0.986);
-    color: #c4ccde;
-    
-  }
-  .sidebarv2 {
-    
-    height: calc(100vh - 10px);
-    border-right: 1px solid #c4ccde;
-    background-color: rgba(51, 48, 48, 0.986);
-    color: #c4ccde;
-    
-  }
-  
- 
-  .active{
-      background-color: #c4ccde;
-      padding: 10px;
-    
-  }
-  .flex {
-    display: flex;
-  }
-  
-  .content{
-    width: 100%;
-  }
-  
-  .sidebarv2__logout{
+  width: 14rem;
+  height: calc(100vh - 10px);
+  border-right: 1px solid #c4ccde;
+  background-color: rgba(51, 48, 48, 0.986);
+  color: #c4ccde;
 
-    margin-top: 450px;
-    margin-left: 20px;
-  
-   }
+}
+.sidebarv2 {
 
-   .name{
+  height: calc(100vh - 10px);
+  border-right: 1px solid #c4ccde;
+  background-color: rgba(51, 48, 48, 0.986);
+  color: #c4ccde;
 
-    margin-left: 500px;
-  
-   }
+}
+
+.sidebarv2logout{
+
+margin-top: 450px;
+margin-left: 20px;
+
+}
+.active{
+    background-color: #c4ccde;
+    padding: 10px;
+}
+.flex {
+  display: flex;
+}
+
+.content{
+  width: 100%;
+}
+
+.sidebarv2logout{
+
+  margin-top: 450px;
+  margin-left: 20px;
+
+ }
+ .MuiTypography-subtitle2{
+  padding-right: 90em;
+ }

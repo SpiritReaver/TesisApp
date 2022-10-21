@@ -1,6 +1,5 @@
 import "./ItemReceta.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Sidebarv2 from "../Navegacion/Sidebarv2";
 import BootstrapDialogTitle from "../ItemRecetas/Modal/Modal";
 import React, { useState, useEffect } from "react";
@@ -32,8 +31,8 @@ const ItemReceta = () => {
             <div className="hotelWrapper">
               <h1 className="hotelTitle">{Receta.titulo}</h1>
               <div className="hotelAddress">
-                <FontAwesomeIcon icon={faLocationDot} />
-                <span>{TipoReceta.tipoReceta}</span>
+                <FontAwesomeIcon icon="fa-solid fa-utensils" />
+                <span className="TipoDieta">{TipoReceta.tipoReceta}</span>
               </div>
               <span className="hotelDistance">Ingredientes</span>
               <div className="hotelDetails">
@@ -60,7 +59,7 @@ const ItemReceta = () => {
                 <div className="hotelDetailsPrice">
                   <span>{Receta.informacionNutricional}</span>
                   <h2>
-                    <b>{Receta.precioReceta}</b> (COP)
+                    <b>${Receta.precioReceta}</b> (COP)
                   </h2>
                   <BootstrapDialogTitle />
                 </div>

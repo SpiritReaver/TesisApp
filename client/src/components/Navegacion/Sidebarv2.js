@@ -44,7 +44,7 @@ export default function Sidebarv2() {
         setName(res.nombre);
         console.log(name);
       });
-    }, 1000);
+    }, 5);
   }, [getUserId, name]);
 
   const handleClick = (e) => {
@@ -70,13 +70,11 @@ export default function Sidebarv2() {
             BogoFood &nbsp;
           </Typography>
 
-          <Typography variant="h8" noWrap component="div">
+          <Typography variant="subtitle2" noWrap component="div">
             La app que te cuida
           </Typography>
 
-          <Typography className="nya" noWrap component="div">
-            Bienvenido,{name}
-          </Typography>
+          <Typography variant="subtitle1">Bienvenido {name}</Typography>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -121,7 +119,7 @@ export default function Sidebarv2() {
               <div className="sidebarv2__logout">
                 <ListItem>
                   <Button variant="contained" onClick={handleClick}>
-                    Log Out
+                    Cerrar sesión
                   </Button>
                 </ListItem>
               </div>

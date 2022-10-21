@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Busqueda from "./Busqueda";
 import Sidebarv2 from "../components/Navegacion/Sidebarv2";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -25,7 +24,6 @@ export const Inicio = () => {
         <div className="flex">
           <Sidebarv2 />
           <div className="content">
-            <Busqueda />
             <h1 className="texto">Bienvenido a BogoFood</h1>
             <p></p>
             <h3 className="texto2">La app que te cuida</h3>

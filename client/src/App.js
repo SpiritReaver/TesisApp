@@ -11,25 +11,35 @@ import ItemReceta from "./components/ItemRecetas/ItemReceta";
 import Inicio from "./pages/Inicio";
 import { UserContext } from "./context/UserContext";
 import { UserIdContext } from "./context/UserIdContext";
+import { ParamContext } from "./context/ParamContext";
+import { QueryContext } from "./context/QueryContext";
 
 export default function App() {
   return (
     <UserContext>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<RegistroContainer />} />
-        </Routes>
-        <UserIdContext>
-          <Routes suppressNoMatchWarning={true}>
-            <Route path="/Busqueda" exact={true} element={<Busqueda />} />
-            <Route path="/Inicio" exact={true} element={<Inicio />} />
-            <Route path="/Historial" exact={true} element={<Historial />} />
-            <Route path="/ListaCompra" exact={true} element={<ListaCompra />} />
-            <Route path="/Recetas" exact={true} element={<Recetas />} />
-            <Route path="/Recetas/:RecetaId" element={<ItemReceta />} />
-          </Routes>
-        </UserIdContext>
-      </BrowserRouter>
+      <QueryContext>
+        <ParamContext>
+          <BrowserRouter>
+            <Routes>
+              <Route index element={<RegistroContainer />} />
+            </Routes>
+            <UserIdContext>
+              <Routes suppressNoMatchWarning={true}>
+                <Route path="/Busqueda" exact={true} element={<Busqueda />} />
+                <Route path="/Inicio" exact={true} element={<Inicio />} />
+                <Route path="/Historial" exact={true} element={<Historial />} />
+                <Route
+                  path="/ListaCompra"
+                  exact={true}
+                  element={<ListaCompra />}
+                />
+                <Route path="/Recetas" exact={true} element={<Recetas />} />
+                <Route path="/Recetas/:RecetaId" element={<ItemReceta />} />
+              </Routes>
+            </UserIdContext>
+          </BrowserRouter>
+        </ParamContext>
+      </QueryContext>
     </UserContext>
   );
 }
