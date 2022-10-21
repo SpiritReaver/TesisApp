@@ -13,6 +13,7 @@ import { UserContext } from "./context/UserContext";
 import { UserIdContext } from "./context/UserIdContext";
 import { ParamContext } from "./context/ParamContext";
 import { QueryContext } from "./context/QueryContext";
+import ListaCompraTotal from "./components/ListaCompra/ListaCompraTotal";
 
 export default function App() {
   return (
@@ -33,6 +34,11 @@ export default function App() {
                   exact={true}
                   element={<ListaCompra />}
                 />
+                <Route
+                  path="/listaRecetas/listaRecetasTotal/:id"
+                  element={<ListaCompraTotal />}
+                />
+
                 <Route path="/Recetas" exact={true} element={<Recetas />} />
                 <Route path="/Recetas/:RecetaId" element={<ItemReceta />} />
               </Routes>
