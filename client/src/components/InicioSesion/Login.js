@@ -43,20 +43,16 @@ const Login = ({ handleChange }) => {
   const { login, isLogged } = useUser();
 
   useEffect(() => {
-    console.log(isLogged);
     if (isLogged) navigate("/inicio");
   }, [isLogged, navigate]);
 
   const onSubmitLogin = (values, props) => {
     ////Aca imprimo los datos que esta tomando
-    console.log(values);
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
     }, 2000);
     login({ correo: values.correo, contraseña: values.contraseña });
-
-    console.log(isLogged);
   };
 
   return (

@@ -11,7 +11,6 @@ export default function registerService({
   return axios
     .post(URL, { nombre, correo, telefono, contraseña })
     .then((res) => {
-      console.log(res.data);
       return res;
     });
 }

@@ -1,5 +1,4 @@
 import "./ItemReceta.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Sidebarv2 from "../Navegacion/Sidebarv2";
 import BootstrapDialogTitle from "../ItemRecetas/Modal/Modal";
 import React, { useState, useEffect } from "react";
@@ -22,6 +21,15 @@ const ItemReceta = () => {
     });
   }, [RecetaId]);
 
+  function color(color) {
+    const coloresTipoRecetas = {
+      "Dieta para diabeticos": "#00d7f3f3",
+      "Dieta Sana": "#51da5c",
+      "Dieta Baja en calorias": "#fff000",
+    };
+    return coloresTipoRecetas[color];
+  }
+
   return (
     <div key={Receta.id}>
       <div className="flex">
@@ -31,8 +39,14 @@ const ItemReceta = () => {
             <div className="hotelWrapper">
               <h1 className="hotelTitle">{Receta.titulo}</h1>
               <div className="hotelAddress">
-                <FontAwesomeIcon icon="fa-solid fa-utensils" />
-                <span className="TipoDieta">{TipoReceta.tipoReceta}</span>
+                <span
+                  className="TipoDieta"
+                  style={{
+                    backgroundColor: color(TipoReceta.tipoReceta),
+                  }}
+                >
+                  {TipoReceta.tipoReceta}
+                </span>
               </div>
               <span className="hotelDistance">Ingredientes</span>
               <div className="hotelDetails">
@@ -40,7 +54,9 @@ const ItemReceta = () => {
                   {Productos.map((Productos) => {
                     return (
                       <div key={Productos.id}>
-                        <li>{Productos.producto}</li>
+                        <li>
+                          {Productos.producto}:{Productos.cantidad}Kg
+                        </li>
                       </div>
                     );
                   })}

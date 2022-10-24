@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -7,8 +8,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import PorcionesSelect from "./PorcionesSelect";
 import "./PorcionesSelect.css";
+import { useParams } from "react-router-dom";
+import UpdatePorciones from "../../../services/UpdatePorciones";
+import RecetasToList from "../../../services/RecetaToList";
+import Context from "../../../context/UserIdContext";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -49,13 +53,47 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedDialogs() {
-  const [open, setOpen] = React.useState(false);
+  const [openOptions, setOpenOptions] = useState(false);
+  const [options, setOptions] = useState({
+    porciones: 1,
+  });
+  const [open, setOpen] = useState(false);
+  const { RecetaId } = useParams();
+  const { UserId } = useContext(Context);
+
+  console.log(UserId);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClick = () => {
+    setOpen(false);
+    console.log(options.porciones);
+    UpdatePorciones({ porciones: options.porciones, idreceta: RecetaId })
+      .then((res) => {
+        console.log(res.data);
+        RecetasToList({ UserId: UserId, idreceta: RecetaId }).then((res) => {
+          console.log(res.data);
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      });
+  };
+
+  const handleOption = (name, operation) => {
+    setOptions((prev) => {
+      return {
+        ...prev,
+        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+      };
+    });
   };
 
   return (
@@ -75,10 +113,43 @@ export default function CustomizedDialogs() {
           Selecciona el número de porciones que deseas
         </BootstrapDialogTitle>
         <div className="UwU">
-          <PorcionesSelect />
+          <div>
+            <div>
+              <div>
+                <span
+                  onClick={() => setOpenOptions(!openOptions)}
+                  className="headerSearchText"
+                >{`${options.porciones} PORCIONES  `}</span>
+                {!openOptions && (
+                  <div>
+                    <div className="options">
+                      <div className="optionCounter">
+                        <button
+                          disabled={options.porciones <= 1}
+                          onClick={() => handleOption("porciones", "d")}
+                          className="optionCounterButton"
+                        >
+                          -
+                        </button>
+                        <span className="optionCounter">
+                          {options.porciones}
+                        </span>
+                        <button
+                          onClick={() => handleOption("porciones", "i")}
+                          className="optionCounterButton"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={handleClick}>
             Guardar
           </Button>
         </DialogActions>

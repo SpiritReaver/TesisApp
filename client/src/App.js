@@ -20,11 +20,11 @@ export default function App() {
     <UserContext>
       <QueryContext>
         <ParamContext>
-          <BrowserRouter>
-            <Routes>
-              <Route index element={<RegistroContainer />} />
-            </Routes>
-            <UserIdContext>
+          <UserIdContext>
+            <BrowserRouter>
+              <Routes>
+                <Route index element={<RegistroContainer />} />
+              </Routes>
               <Routes suppressNoMatchWarning={true}>
                 <Route path="/Busqueda" exact={true} element={<Busqueda />} />
                 <Route path="/Inicio" exact={true} element={<Inicio />} />
@@ -42,8 +42,8 @@ export default function App() {
                 <Route path="/Recetas" exact={true} element={<Recetas />} />
                 <Route path="/Recetas/:RecetaId" element={<ItemReceta />} />
               </Routes>
-            </UserIdContext>
-          </BrowserRouter>
+            </BrowserRouter>
+          </UserIdContext>
         </ParamContext>
       </QueryContext>
     </UserContext>

@@ -42,10 +42,9 @@ export default function Sidebarv2() {
     setTimeout(() => {
       getUserInfo().then((res) => {
         setName(res.nombre);
-        console.log(name);
       });
-    }, 5);
-  }, [getUserId, name]);
+    }, 500);
+  }, [name, getUserId]);
 
   const handleClick = (e) => {
     e.preventDefault();

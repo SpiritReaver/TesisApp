@@ -7,8 +7,6 @@ export default function loginService({ correo, contraseña }) {
   return axios
     .post(URL, { correo, contraseña }, { withCredentials: true })
     .then((res) => {
-      console.log(res);
-      console.log(res.headers);
       const { token } = res.data;
       return token;
     });

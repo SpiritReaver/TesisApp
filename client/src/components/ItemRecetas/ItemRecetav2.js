@@ -17,6 +17,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate } from "react-router-dom";
 import QueryContext from "../../context/QueryContext";
 import ParamContext from "../../context/ParamContext";
+import UpdatePorciones from "../../services/UpdatePorciones";
 
 import "./ItemRecetav2.css";
 
@@ -61,6 +62,11 @@ export default function ItemRecetav2() {
   useEffect(() => {
     axios.get("http://3.83.218.170:4000/api/recetas").then((res) => {
       setItems(res.data.RecetasAll);
+      res.data.RecetasAll.forEach((rec) =>
+        UpdatePorciones({ porciones: 1, idreceta: rec.id }).then((res) =>
+          console.log(res.data)
+        )
+      );
     });
   }, []);
 
