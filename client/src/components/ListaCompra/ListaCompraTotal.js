@@ -3,9 +3,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
+import { Button } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import Avatar from "@mui/material/Avatar";
+
 import Sidebarv2 from "../Navegacion/Sidebarv2";
 import { Typography } from "@mui/material";
 import "../ListaCompra/ListaCompraTotal.css";
@@ -44,9 +44,9 @@ export default function ListaCompraTotal() {
         <div className="lista">
           <List
             dense
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={{ width: "100%", maxWidth: 700, bgcolor: "background.paper" }}
           >
-            {[0, 1, 2, 3].map((value) => {
+            {[0, 1, 2, 3, 4].map((value) => {
               const labelId = `checkbox-list-secondary-label-${value}`;
               return (
                 <ListItem
@@ -62,21 +62,21 @@ export default function ListaCompraTotal() {
                   disablePadding
                 >
                   <ListItemButton>
-                    <ListItemAvatar>
-                      <Avatar
-                        alt={`Avatar n°${value + 1}`}
-                        src={`/static/images/avatar/${value + 1}.jpg`}
-                      />
-                    </ListItemAvatar>
                     <ListItemText
                       id={labelId}
-                      primary={`Line item ${value + 1}`}
+                      primary={`Producto ${value + 1}`}
                     />
+                    <ListItemText primary="precio $$$" />
+                    <ListItemText primary="cantidad" />
                   </ListItemButton>
                 </ListItem>
               );
             })}
           </List>
+          <div className="boton">
+            {" "}
+            <Button variant="contained"> Confirmar</Button>
+          </div>
         </div>
       </div>
     </div>

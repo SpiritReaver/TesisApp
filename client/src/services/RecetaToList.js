@@ -5,7 +5,7 @@ export default function RecetasToList({ UserId, idreceta }) {
     .post(
       "http://3.83.218.170:4000/api/recetas/" + idreceta + "/recetatolist",
       {
-        UserId: UserId,
+        userId: UserId,
       }
     )
     .then((res) => {

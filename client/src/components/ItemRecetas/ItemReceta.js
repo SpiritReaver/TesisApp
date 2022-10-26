@@ -29,7 +29,7 @@ const ItemReceta = () => {
     };
     return coloresTipoRecetas[color];
   }
-
+  var valor = Math.trunc(Receta.precioReceta / 2).toLocaleString("en");
   return (
     <div key={Receta.id}>
       <div className="flex">
@@ -55,7 +55,7 @@ const ItemReceta = () => {
                     return (
                       <div key={Productos.id}>
                         <li>
-                          {Productos.producto}:{Productos.cantidad}Kg
+                          {Productos.producto}:{Productos.cantidad / 2}Lb
                         </li>
                       </div>
                     );
@@ -75,7 +75,7 @@ const ItemReceta = () => {
                 <div className="hotelDetailsPrice">
                   <span>{Receta.informacionNutricional}</span>
                   <h2>
-                    <b>${Receta.precioReceta}</b> (COP)
+                    <b>${valor}</b> (COP)
                   </h2>
                   <BootstrapDialogTitle />
                 </div>
