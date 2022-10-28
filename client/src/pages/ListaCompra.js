@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebarv2 from "../components/Navegacion/Sidebarv2";
-import ListaRecetas from "../components/ListaCompra/ListaCompras";
+import ListaCompras from "../components/ListaCompra/ListaCompras";
 import Typography from "@mui/material/Typography";
 
 export const ListaCompra = () => {
@@ -16,9 +16,7 @@ export const ListaCompra = () => {
             Acá aparecerán todas las listas de compras creadas recientemente
           </h3>
         </div>
-        <ListaRecetas />
-        <ListaRecetas />
-        <ListaRecetas />
+        <ListaCompras />
       </div>
     </div>
   );

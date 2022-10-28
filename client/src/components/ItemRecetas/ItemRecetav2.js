@@ -51,10 +51,8 @@ export default function ItemRecetav2() {
 
   const toggleExpanded = (id) => {
     setExpandedIds((prevExpandedIds) => {
-      // if id is already in array remove
       if (prevExpandedIds.includes(id))
         return prevExpandedIds.filter((i) => i !== id);
-      // else add to array
       return [...prevExpandedIds, id];
     });
   };
