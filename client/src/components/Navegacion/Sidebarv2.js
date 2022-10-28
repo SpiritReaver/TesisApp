@@ -27,7 +27,7 @@ export default function Sidebarv2() {
     width: "100%",
     padding: "2px",
     display: "inline-block",
-    textAlign: "left",
+    textAlign: "center",
     textDecoration: "none",
     color: "white",
   };
@@ -115,7 +115,7 @@ export default function Sidebarv2() {
                   <ListItemText>Usuario</ListItemText>
                 </NavLink>
               </ListItem>
-              <div className="sidebarv2__logout">
+              <div className="sidebarv2logout">
                 <ListItem>
                   <Button variant="contained" onClick={handleClick}>
                     Cerrar sesión
