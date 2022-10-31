@@ -1,19 +1,60 @@
-import React from "react";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
-import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
 import Sidebarv2 from "../components/Navegacion/Sidebarv2";
+import getUserInfo from "../services/gerUserInfo";
+import userUserId from "../hooks/userUserId";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Button from "@mui/material/Button";
+import useUser from "../hooks/useUser";
+import { useParams } from "react-router-dom";
 import "./Usuario.css";
+import axios from "axios";
 
 export default function Usuario() {
-  const [values, setValues] = React.useState({
-    nombre: "",
-    corre: "",
-    telefono: "",
-  });
+  const navigate = useNavigate();
+  const { getUserId } = userUserId();
+  const { logout } = useUser();
+  const { usuarioId } = useParams();
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const [name, setName] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [telefono, setTelefono] = useState("");
+
+  useEffect(() => {
+    getUserId();
+    setTimeout(() => {
+      getUserInfo(usuarioId).then((res) => {
+        setName(res.nombre);
+        setCorreo(res.correo);
+        setTelefono(res.telefono);
+      });
+    }, 500);
+  }, [getUserId, usuarioId]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    axios
+      .put("http://3.83.218.170:4000/api/users/" + usuarioId, {
+        nombre: name,
+        correo: correo,
+        telefono: telefono,
+      })
+      .then((res) => {
+        console.log(res.data);
+        window.location.reload();
+      });
+  };
+
+  const handleClick2 = (e) => {
+    e.preventDefault();
+    axios
+      .delete("http://3.83.218.170:4000/api/users/" + usuarioId)
+      .then((res) => {
+        console.log(res.data);
+        logout();
+        navigate("/");
+      });
   };
 
   return (
@@ -21,42 +62,45 @@ export default function Usuario() {
       <Sidebarv2 />
       <div className="content">
         <div className="OwO">
-          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-            <div>
-              <TextField
-                label="Nombre"
-                id="filled-start-adornment"
-                sx={{ m: 1, width: "25ch" }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">Nombre</InputAdornment>
-                  ),
-                }}
-                variant="filled"
-              />
-              <TextField
-                label="Correo"
-                id="filled-start-adornment"
-                sx={{ m: 1, width: "25ch" }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start"></InputAdornment>
-                  ),
-                }}
-                variant="filled"
-              />
-              <TextField
-                label="Teléfono"
-                id="filled-start-adornment"
-                sx={{ m: 1, width: "25ch" }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start"> </InputAdornment>
-                  ),
-                }}
-                variant="filled"
-              />
-            </div>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+          >
+            <input
+              type="text"
+              name="Nombre"
+              label="Nombre"
+              variant="filled"
+              defaultValue={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <input
+              type="email"
+              name="Correo"
+              label="Correo"
+              variant="filled"
+              defaultValue={correo}
+              onChange={(e) => setCorreo(e.target.value)}
+            />
+
+            <input
+              type="number"
+              name="Correo"
+              label="Telefono"
+              variant="filled"
+              defaultValue={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+            />
+
+            <Button variant="contained" onClick={handleClick}>
+              Editar
+            </Button>
+            <Button variant="contained" onClick={handleClick2}>
+              Eliminar usuario
+            </Button>
           </Box>
         </div>
       </div>

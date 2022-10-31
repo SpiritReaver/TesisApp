@@ -30,7 +30,11 @@ export default function App() {
                 <Route path="/Busqueda" exact={true} element={<Busqueda />} />
                 <Route path="/Inicio" exact={true} element={<Inicio />} />
                 <Route path="/Historial" exact={true} element={<Historial />} />
-                <Route path="/Usuario" exact={true} element={<Usuario />} />
+                <Route
+                  path="/Usuario/:usuarioId"
+                  exact={true}
+                  element={<Usuario />}
+                />
                 <Route
                   path="/ListaCompra"
                   exact={true}

@@ -111,7 +111,14 @@ export default function Sidebarv2() {
                 </NavLink>
               </ListItem>
               <ListItem>
-                <NavLink to="/Usuario" style={NavStyle}>
+                <NavLink
+                  to="/Usuario/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/Usuario/" + `${localStorage.getItem("UserId")}`);
+                  }}
+                  style={NavStyle}
+                >
                   <ListItemText>Usuario</ListItemText>
                 </NavLink>
               </ListItem>
