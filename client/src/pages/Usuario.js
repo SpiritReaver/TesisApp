@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Sidebarv2 from "../components/Navegacion/Sidebarv2";
 import getUserInfo from "../services/gerUserInfo";

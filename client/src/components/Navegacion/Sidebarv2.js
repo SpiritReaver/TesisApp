@@ -115,6 +115,7 @@ export default function Sidebarv2() {
                   to="/Usuario/"
                   onClick={(e) => {
                     e.preventDefault();
+                    // eslint-disable-next-line no-useless-concat
                     navigate("/Usuario/" + `${localStorage.getItem("UserId")}`);
                   }}
                   style={NavStyle}
