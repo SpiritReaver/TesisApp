@@ -36,15 +36,37 @@ export default function Sidebarv2() {
   const { getUserId } = userUserId();
 
   const [name, setName] = useState("");
+  const [isReadyForInstall, setIsReadyForInstall] = React.useState(false);
+
+  async function downloadApp() {
+    console.log("👍", "butInstall-clicked");
+    const promptEvent = window.deferredPrompt;
+    if (!promptEvent) {
+      console.log("oops, no prompt event guardado en window");
+      return;
+    }
+    promptEvent.prompt();
+    const result = await promptEvent.userChoice;
+    console.log("👍", "userChoice", result);
+    window.deferredPrompt = null;
+    setIsReadyForInstall(false);
+  }
 
   useEffect(() => {
     getUserId();
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      console.log("👍", "beforeinstallprompt", event);
+      window.deferredPrompt = event;
+      setIsReadyForInstall(true);
+      console.log(isReadyForInstall);
+    });
     setTimeout(() => {
       getUserInfo().then((res) => {
         setName(res.nombre);
       });
     }, 500);
-  }, [name, getUserId]);
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -72,6 +94,12 @@ export default function Sidebarv2() {
           <Typography variant="subtitle2" noWrap component="div">
             La app que te cuida
           </Typography>
+
+          {isReadyForInstall && (
+            <Button variant="contained" onClick={downloadApp}>
+              DESCARGAR
+            </Button>
+          )}
 
           <Typography variant="subtitle1">Bienvenido {name}</Typography>
         </Toolbar>
