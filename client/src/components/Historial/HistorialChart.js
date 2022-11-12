@@ -83,7 +83,7 @@ const HistorialChart = () => {
     };
     getProductos();
 
-    setTimeout(() => setLoading(true), 2000);
+    setTimeout(() => setLoading(true), 3000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q]);
 
