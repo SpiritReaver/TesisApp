@@ -65,7 +65,7 @@ export default function ListaCompraTotal() {
 
   useEffect(() => {
     axios
-      .get("http://3.83.218.170:4000/api/listacompras/" + ListaId)
+      .get("https://3.83.218.170:4000/api/listacompras/" + ListaId)
       .then((res) => {
         SetProductos(res.data.Lista.Productos);
         if (res.data.Lista.Productos.length > 0) {

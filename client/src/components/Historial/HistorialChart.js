@@ -41,7 +41,7 @@ const HistorialChart = () => {
   useEffect(() => {
     const getProductos = async () => {
       const productosInfo = await axios.get(
-        "http://3.83.218.170:4000/api/productos/"
+        "https://3.83.218.170:4000/api/productos/"
       );
       setProductos(
         duplicates(
