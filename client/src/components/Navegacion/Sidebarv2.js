@@ -36,7 +36,7 @@ export default function Sidebarv2() {
   const { getUserId } = userUserId();
 
   const [name, setName] = useState("");
-  const [isReadyForInstall, setIsReadyForInstall] = React.useState(false);
+  const [isReadyForInstall, setIsReadyForInstall] = React.useState(true);
 
   async function downloadApp() {
     console.log("👍", "butInstall-clicked");
@@ -66,7 +66,7 @@ export default function Sidebarv2() {
         setName(res.nombre);
       });
     }, 500);
-  }, []);
+  }, [getUserId, isReadyForInstall]);
 
   const handleClick = (e) => {
     e.preventDefault();

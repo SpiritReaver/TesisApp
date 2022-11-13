@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function CheckProducto(ProductoListaId) {
   const res = await axios.put(
-    "https://3.83.218.170:4000/api/productoslista/" + ProductoListaId,
+    "http://3.83.218.170:4000/api/productoslista/" + ProductoListaId,
     {
       completo: true,
     }
@@ -12,7 +12,7 @@ export async function CheckProducto(ProductoListaId) {
 
 export async function UncheckProducto(ProductoListaId) {
   const res = await axios.put(
-    "https://3.83.218.170:4000/api/productoslista/" + ProductoListaId,
+    "http://3.83.218.170:4000/api/productoslista/" + ProductoListaId,
     {
       completo: false,
     }
@@ -22,7 +22,7 @@ export async function UncheckProducto(ProductoListaId) {
 
 export async function CompleteList(ListaId) {
   const res = await axios.put(
-    "https://3.83.218.170:4000/api/listacompras/" + ListaId,
+    "http://3.83.218.170:4000/api/listacompras/" + ListaId,
     {
       completa: true,
     }

@@ -1,0 +1,23 @@
+{
+  "background_color": "#ffffff",
+  "categories": ["lifestyle", "food"],
+  "description": "Aplicacion PWA",
+  "dir": "ltr",
+  "display_override": ["standalone", "fullscreen"],
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "fondo.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    }
+  ],
+  "lang": "es-MX",
+  "name": "PWA BogoFood",
+  "orientation": "portrait",
+  "prefer_related_application": false,
+  "scope": "/",
+  "short_name": "PWA Lasfi",
+  "start_url": "/",
+  "theme_color": "#4bcc6a"
+}
