@@ -12,7 +12,11 @@ const RegistroContainer = () => {
     setValue(newValue);
   };
 
-  const paperStyle = { width: 400, margin: "60px auto" };
+  const paperStyle = {
+    width: 400,
+    margin: "60px auto",
+    background: "client/public/fondo.jpg",
+  };
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
