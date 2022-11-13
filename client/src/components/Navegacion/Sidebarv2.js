@@ -36,7 +36,7 @@ export default function Sidebarv2() {
   const { getUserId } = userUserId();
 
   const [name, setName] = useState("");
-  const [isReadyForInstall, setIsReadyForInstall] = React.useState(true);
+  const [isReadyForInstall, setIsReadyForInstall] = React.useState(false);
 
   async function downloadApp() {
     console.log("👍", "butInstall-clicked");

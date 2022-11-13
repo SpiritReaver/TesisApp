@@ -58,7 +58,7 @@ export default function ItemRecetav2() {
   };
 
   useEffect(() => {
-    axios.get("http://3.83.218.170:4000/api/recetas").then((res) => {
+    axios.get("https://3.83.218.170:4000/api/recetas").then((res) => {
       setItems(res.data.RecetasAll);
       res.data.RecetasAll.forEach((rec) =>
         UpdatePorciones({ porciones: 1, idreceta: rec.id }).then((res) =>

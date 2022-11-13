@@ -30,7 +30,7 @@ export default function ListaCompras() {
 
   useEffect(() => {
     axios
-      .get("http://3.83.218.170:4000/api/users/" + UserId + "/listascompras")
+      .get("https://3.83.218.170:4000/api/users/" + UserId + "/listascompras")
       .then((res) => {
         setListas(res.data.listasCompras);
       });
