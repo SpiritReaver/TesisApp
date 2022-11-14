@@ -13,7 +13,7 @@ const ItemReceta = () => {
   const { RecetaId } = useParams();
 
   useEffect(() => {
-    const URL = "https://3.83.218.170:4000/api/recetas/";
+    const URL = "http://3.83.218.170:4050/api/recetas/";
     axios.get(URL + RecetaId).then((res) => {
       setReceta(res.data.lista);
       setProductos(res.data.lista.Productos);
