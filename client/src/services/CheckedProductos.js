@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function CheckProducto(ProductoListaId) {
   const res = await axios.put(
-    "http://3.83.218.170:4050/api/productoslista/" + ProductoListaId,
+    "https://api-kgk5.onrender.com/api/productoslista/" + ProductoListaId,
     {
       completo: true,
     }
@@ -12,7 +12,7 @@ export async function CheckProducto(ProductoListaId) {
 
 export async function UncheckProducto(ProductoListaId) {
   const res = await axios.put(
-    "http://3.83.218.170:4050/api/productoslista/" + ProductoListaId,
+    "https://api-kgk5.onrender.com/api/productoslista/" + ProductoListaId,
     {
       completo: false,
     }
@@ -22,7 +22,7 @@ export async function UncheckProducto(ProductoListaId) {
 
 export async function CompleteList(ListaId) {
   const res = await axios.put(
-    "http://3.83.218.170:4050/api/listacompras/" + ListaId,
+    "https://api-kgk5.onrender.com/api/listacompras/" + ListaId,
     {
       completa: true,
     }

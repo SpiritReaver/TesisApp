@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://3.83.218.170:4050/api/auth/registro";
+const URL = "https://api-kgk5.onrender.com/api/auth/registro";
 
 export default function registerService({
   nombre,

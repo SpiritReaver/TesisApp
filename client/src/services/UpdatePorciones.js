@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default function UpdatePorciones({ porciones, idreceta }) {
   return axios
-    .put("http://3.83.218.170:4050/api/recetas/" + idreceta, {
+    .put("https://api-kgk5.onrender.com/api/recetas/" + idreceta, {
       porciones: porciones,
     })
     .then((res) => {

@@ -30,7 +30,9 @@ export default function ListaCompras() {
 
   useEffect(() => {
     axios
-      .get("http://3.83.218.170:4050/api/users/" + UserId + "/listascompras")
+      .get(
+        "https://api-kgk5.onrender.com/api/users/" + UserId + "/listascompras"
+      )
       .then((res) => {
         setListas(res.data.listasCompras);
       });
