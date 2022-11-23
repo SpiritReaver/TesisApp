@@ -35,7 +35,7 @@ export default function Usuario() {
   const handleClick = (e) => {
     e.preventDefault();
     axios
-      .put("https://3.83.218.170:4000/api/users/" + usuarioId, {
+      .put("https://api-kgk5.onrender.com/api/users/" + usuarioId, {
         nombre: name,
         correo: correo,
         telefono: telefono,
@@ -49,7 +49,7 @@ export default function Usuario() {
   const handleClick2 = (e) => {
     e.preventDefault();
     axios
-      .delete("https://3.83.218.170:4000/api/users/" + usuarioId)
+      .delete("https://api-kgk5.onrender.com/api/users/" + usuarioId)
       .then((res) => {
         console.log(res.data);
         logout();
