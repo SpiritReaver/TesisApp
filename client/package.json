@@ -10,8 +10,6 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.9",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.1.2",
     "browserify-zlib": "^0.2.0",
@@ -19,7 +17,9 @@
     "formik": "^2.2.9",
     "fortawesome": "^0.0.1-security",
     "https": "^1.0.0",
+    "jest-dom": "^4.0.0",
     "json": "^11.0.0",
+    "msw": "^0.48.3",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "nodemon": "^2.0.20",
     "path-browserify": "^1.0.1",
@@ -64,5 +64,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0"
   }
 }

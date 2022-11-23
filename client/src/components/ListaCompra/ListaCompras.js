@@ -47,13 +47,12 @@ export default function ListaCompras() {
     .map((listasCompras) => (
       <React.Fragment key={listasCompras.id}>
         <Card className="searchItem" sx={{ maxWidth: 345 }}>
-          <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-          >
+          <List sx={{ width: "100%", maxWidth: 360 }}>
             <ListItem alignItems="flex-start">
               <ListItemText
                 className="namep"
-                primary="Ensalada de papa"
+                primary={listasCompras.nombre}
+                component={"span"}
                 secondary={
                   <>
                     {listasCompras.Productos.map((Productos) => {
@@ -61,12 +60,14 @@ export default function ListaCompras() {
                         <React.Fragment key={Productos.id}>
                           <Typography
                             sx={{ display: "flex" }}
-                            component="span"
                             variant="h6"
+                            component="span"
                             color="text.primary"
                           ></Typography>
-                          <List>
-                            <ListItem>{Productos.producto} </ListItem>
+                          <List component={"span"}>
+                            <ListItem component={"span"}>
+                              {Productos.producto}{" "}
+                            </ListItem>
                           </List>
                         </React.Fragment>
                       );
@@ -80,12 +81,14 @@ export default function ListaCompras() {
               <ListItemText
                 className="ola"
                 variant="h3"
+                component={"span"}
                 primary="Precio total "
                 secondary={
                   <React.Fragment>
                     <Typography
                       sx={{ display: "flex" }}
                       variant="h4"
+                      component={"span"}
                       color="text.primary"
                     >
                       {listasCompras.precioTotal}

@@ -83,7 +83,7 @@ const HistorialChart = () => {
     };
     getProductos();
 
-    setTimeout(() => setLoading(true), 3000);
+    setTimeout(() => setLoading(true), 5000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q]);
 
@@ -91,8 +91,10 @@ const HistorialChart = () => {
     <div className="App">
       <div>
         <select onChange={handleChange}>
-          {productos.map((producto) => (
-            <option value={producto}>{producto}</option>
+          {productos.map((producto, i) => (
+            <option key={i} value={producto}>
+              {producto}
+            </option>
           ))}
         </select>
       </div>

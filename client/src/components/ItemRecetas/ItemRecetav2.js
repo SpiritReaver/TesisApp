@@ -61,9 +61,7 @@ export default function ItemRecetav2() {
     axios.get("https://api-kgk5.onrender.com/api/recetas").then((res) => {
       setItems(res.data.RecetasAll);
       res.data.RecetasAll.forEach((rec) =>
-        UpdatePorciones({ porciones: 1, idreceta: rec.id }).then((res) =>
-          console.log(res.data)
-        )
+        UpdatePorciones({ porciones: 1, idreceta: rec.id })
       );
     });
   }, []);
